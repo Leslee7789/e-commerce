@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MaterialApp(debugShowCheckedModeBanner: false, home: MyApp()));
+  runApp(const MaterialApp(debugShowCheckedModeBanner: false, home: MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -26,25 +26,25 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Movies Hub'),
+        title: const Text('Movies Hub'),
         centerTitle: true,
         backgroundColor: Colors.blueAccent,
-        actions: [
+        actions: const [
           Icon(Icons.search),
           SizedBox(width: 15),
           Icon(Icons.notifications),
           SizedBox(width: 15),
           Icon(Icons.download),
         ],
-        leading: Icon(Icons.menu),
+        leading: const Icon(Icons.menu),
       ),
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             Container(
               height: 250,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/blacklist3.jpeg'),
                   fit: BoxFit.cover,
@@ -53,8 +53,8 @@ class _MyAppState extends State<MyApp> {
             ),
             Expanded(
               child: GridView.builder(
-                padding: EdgeInsets.all(10),
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                padding: const EdgeInsets.all(10),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2, // Two items per row
                   crossAxisSpacing: 15, // Horizontal spacing
                   mainAxisSpacing: 15, // Vertical spacing
@@ -72,7 +72,7 @@ class _MyAppState extends State<MyApp> {
                           color: Colors.black.withOpacity(0.5),
                           spreadRadius: 2,
                           blurRadius: 5,
-                          offset: Offset(0, 3), // Shadow position
+                          offset: const Offset(0, 3), // Shadow position
                         ),
                       ],
                       borderRadius: BorderRadius.circular(10),
@@ -85,10 +85,10 @@ class _MyAppState extends State<MyApp> {
                       alignment: Alignment.bottomCenter,
                       child: Container(
                         color: Colors.black.withOpacity(0.5), // Semi-transparent background
-                        padding: EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+                        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
                         child: Text(
                           'Season ${index + 1}', // Label for each grid item
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -105,7 +105,7 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: [
+        items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
           BottomNavigationBarItem(icon: Icon(Icons.message), label: 'Message'),
