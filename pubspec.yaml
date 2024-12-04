@@ -65,6 +65,13 @@ flutter:
    - assets/3.jpg
    - assets/5.jpg
    - assets/6.jpg
+   - assets/blacklist.jpeg
+   - assets/blacklist3.jpeg
+   - assets/season5.jpg
+   - assets/season2.jpeg
+   - assets/season1.jpeg
+   - assets/season4.jpg
+   - assets/last.jpg
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

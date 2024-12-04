@@ -1,160 +1,116 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MaterialApp( 
-    home: MyApp(),
-  ));
+  runApp(MaterialApp(debugShowCheckedModeBanner: false, home: MyApp()));
 }
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
-  State<MyApp> createState() => _myAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
-class _myAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> {
+  // List of image assets
+  final List<String> images = [
+    'assets/season5.jpg',
+    'assets/season4.jpg',
+    'assets/season1.jpeg',
+    'assets/season2.jpeg',
+    'assets/last.jpg',
+    'assets/last.jpg',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(234, 255, 255, 255),
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: Icon(
-          Icons.menu,
-          color: Colors.black87,
-        ),
+        title: Text('Movies Hub'),
+        centerTitle: true,
+        backgroundColor: Colors.blueAccent,
+        actions: [
+          Icon(Icons.search),
+          SizedBox(width: 15),
+          Icon(Icons.notifications),
+          SizedBox(width: 15),
+          Icon(Icons.download),
+        ],
+        leading: Icon(Icons.menu),
       ),
       body: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
+          children: [
+            SizedBox(height: 30),
             Container(
-              width: double.infinity,
+              height: 250,
               decoration: BoxDecoration(
-                color: Colors.white,
+                image: DecorationImage(
+                  image: AssetImage('assets/blacklist3.jpeg'),
+                  fit: BoxFit.cover,
+                ),
               ),
-              padding: EdgeInsets.all(20),
-              child: Column(
-                children: <Widget>[
-                  Text(
-                    'Find your',
-                    style: TextStyle(color: Colors.black, fontSize: 25),
-                  ),
-                  SizedBox(
-                    height: 3,
-                  ),
-                  Text(
-                    'Dream car',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 40,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 242, 230, 230),
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        prefixIcon: Icon(
-                          Icons.search,
-                          color: Colors.black,
-                        ),
-                        hintText: 'your dream car is a click away',
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 20,
             ),
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, // Two columns
-                    crossAxisSpacing: 10, // Space between columns
-                    mainAxisSpacing: 10, // Space between rows
-                    childAspectRatio: 2 / 3, // Aspect ratio for each grid item
-                  ),
-                  itemCount: 4, // Number of images to display (can be increased)
-                  itemBuilder: (context, index) {
-                    // List of image paths
-                    final images = [
-                      'assets/4.jpg',
-                      'assets/2.jpg',
-                      'assets/3.jpg',
-                      'assets/5.jpg',
-                    ];
-
-                    // List of prices corresponding to each image
-                    final prices = [
-                      '\$50,000',
-                      '\$45,000',
-                      '\$60,000',
-                      '\$70,000',
-                    ];
-
-                    return promoCard(images[index], prices[index]);
-                  },
+              child: GridView.builder(
+                padding: EdgeInsets.all(10),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, // Two items per row
+                  crossAxisSpacing: 15, // Horizontal spacing
+                  mainAxisSpacing: 15, // Vertical spacing
                 ),
+                itemCount: images.length, // Number of grid items
+                itemBuilder: (context, index) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.white, // Border color
+                        width: 2.0, // Border width
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.5),
+                          spreadRadius: 2,
+                          blurRadius: 5,
+                          offset: Offset(0, 3), // Shadow position
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(10),
+                      image: DecorationImage(
+                        image: AssetImage(images[index]),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        color: Colors.black.withOpacity(0.5), // Semi-transparent background
+                        padding: EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+                        child: Text(
+                          'Season ${index + 1}', // Label for each grid item
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
           ],
         ),
       ),
-    );
-  }
-
-  Widget promoCard(String image, String price) {
-    return Stack(
-      children: [
-        // Image Container
-        Container(
-          decoration: BoxDecoration(
-            color: Colors.orange,
-            borderRadius: BorderRadius.circular(20),
-            image: DecorationImage(
-              fit: BoxFit.cover,
-              image: AssetImage(image),
-            ),
-          ),
-        ),
-        // Price Overlay
-        Positioned(
-          bottom: 10, // Position the price at the bottom
-          left: 10, // Add padding from the left
-          child: Container(
-            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
-            decoration: BoxDecoration(
-              color: Colors.black.withOpacity(0.7), // Slightly transparent background
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Text(
-              price,
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-              ),
-            ),
-          ),
-        ),
-      ],
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
+          BottomNavigationBarItem(icon: Icon(Icons.message), label: 'Message'),
+        ],
+      ),
     );
   }
 }
